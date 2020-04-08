@@ -1,0 +1,45 @@
+doctype html
+html
+  head
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    link(href='https://fonts.googleapis.com/css?family=Merriweather|Montserrat' rel='stylesheet')
+    link(rel='stylesheet', href='styles/style.css')
+    link(rel='stylesheet', href='/styles/responsive.css')
+  body
+    h1 weather station
+    div(id="dashboard-sections-container")
+      div(id="sensors")
+        table
+          caption sensor data
+          tr
+            th name
+            th time
+            th reading
+            th units     
+          tr(class="sensor" id=sensor.name)
+            td= sensor.name
+            td(class="time") 
+            td(class="measurement")
+            td= sensor.units
+      div(id="outlets")
+        table
+          caption outlet
+            tr
+              th name
+              th isOn
+            tr(class="fan" id=outlet.name)
+              td= outlet.name
+              td(class="state")
+                button(id="isOnButton")= params.isOn
+      div(id="mode")
+        h2 mode
+        button(id="modeButton")= params.mode
+      div(id="timer")
+        h2 timer
+        label(for="startTime") start time
+        input(type="time" id="startTime" name="startTime" value=params.startTime)
+        label(for="endTime") end time
+        input(type="time" id="endTime" name="endTime" value=params.endTime)
+      label(for="threshold" id="thresholdLabel")= params.threshold
+      input(type="range" id="threshold" name="threshold" min="50" max="80" step="1" value=params.threshold)
+    script(src='scripts/main.js')
