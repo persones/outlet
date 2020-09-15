@@ -86,6 +86,7 @@ class Si7021Temp extends Sensor {
             this.measurement = -999;
             return;
           }
+          console.log(data[0], data[1], data)
           this.measurement = c2f((((((data[0] << 8) | data[1]) * 175.72) / 65536) - 46.85));
           this.time = new Date();
         });
@@ -160,14 +161,15 @@ wsServer.on('connection', function connection(ws) {
 });
 
 function c2f(degC) {
-  return (degC * 9 / 5) + 32;
+  return degC;
+  //return (degC * 9 / 5) + 32;
 }
 
 var threshold  = 24;
 var sensorList = [];
 sensorList.push(new Si7021Temp("Si7021Temp", 1));
 sensorList.push(new MPL3115A2Temp("MPL3115A2Temp", 1));
-var sensor = sensorList[0];
+var sensor = sensorList[1];
 var outlet = new Outlet('outlet', 24)
 
 setInterval(() => {
